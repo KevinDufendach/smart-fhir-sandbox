@@ -9,6 +9,17 @@ import {OAuthService} from 'angular-oauth2-oidc';
 export class TestAuthComponent {
 
   constructor(private oauthService: OAuthService) {
+    // Use setStorage to use sessionStorage or another implementation of the TS-type Storage
+    // instead of localStorage
+    // this.oauthService.setStorage(sessionStorage);
+
+    // To also enable single-sign-out set the url for your auth-server's logout-endpoint here
+    // this.oauthService.logoutUrl = "https://steyer-identity-server.azurewebsites.net/identity/connect/endsession";
+
+    // This method just tries to parse the token(s) within the url when
+    // the auth-server redirects the user back to the web-app
+    // It doesn't send the user the the login page
+    // this.oauthService.tryLogin();
   }
 
   public login() {

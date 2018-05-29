@@ -9,7 +9,8 @@ import { TestAuthComponent } from './test-auth/test-auth.component';
 import {HttpClientModule} from '@angular/common/http';
 
 const routes = [
-  {path: 'index.html', component: TestAuthComponent}
+  {path: 'index.html', component: TestAuthComponent},
+  {path: 'landing', component: TestAuthComponent}
 ]
 ;
 
