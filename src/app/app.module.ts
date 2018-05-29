@@ -6,13 +6,7 @@ import { AppComponent } from './app.component';
 
 import { AuthModule } from './auth/auth.module';
 import { TestAuthComponent } from './test-auth/test-auth.component';
-import {HttpClientModule} from '@angular/common/http';
-
-const routes = [
-  {path: 'index.html', component: TestAuthComponent},
-  {path: 'landing', component: TestAuthComponent}
-]
-;
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [

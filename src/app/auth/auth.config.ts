@@ -1,7 +1,6 @@
 import { AuthConfig } from 'angular-oauth2-oidc';
 
 export const authConfig: AuthConfig = {
-
   // Url of the Identity Provider
   // issuer: 'https://open-ic.epic.com/Argonaut/oauth2/authorize',
   // issuer: 'https://open-ic.epic.com/argonaut/api/FHIR/Argonaut/',
