@@ -28,7 +28,7 @@ export class SmartAuthService {
     console.log(sessionStorage[this.state]);
   }
 
-  getEndpointList(): Observable<FhirEndpoint[]> {
+  static getEndpointList(): Observable<FhirEndpoint[]> {
     const endpoints = <FhirEndpoint[]>require('./epic-endpoints.json');
     return of(endpoints);
   }

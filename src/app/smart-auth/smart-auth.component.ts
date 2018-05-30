@@ -14,7 +14,7 @@ export class SmartAuthComponent implements OnInit {
   constructor( private smartAuthService: SmartAuthService ) {}
 
   ngOnInit() {
-    this.smartAuthService.getEndpointList().subscribe( endpoints => {
+    SmartAuthService.getEndpointList().subscribe(endpoints => {
       this.endpoints = endpoints;
       console.log(endpoints);
     });
