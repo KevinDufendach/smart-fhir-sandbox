@@ -8,22 +8,24 @@ import {Observable, of, throwError} from 'rxjs';
 import {SmartBundle} from './smart-bundle';
 import {FhirEndpoint} from './fhir-endpoint';
 import {ActivatedRoute} from '@angular/router';
-import {isUndefined} from 'util';
 import Patient = fhir.Patient;
 
 @Injectable({
   providedIn: 'root'
 })
 export class SmartAuthService {
-  checkConnect: any;
-  // serviceUri: string;
   private sub: any;
   sb: SmartBundle;
   config: AuthConfig;
   private code: string;
+  private state: string;
 
   constructor(private http: HttpClient) {
     this.config = epicSmartAuthConfig;
+    // this.state = Math.floor(Math.random() * 4294967296).toString();
+    this.state = 'BA8AD8D1EA3E882943869118CD24F85CC7BCDE2488B23FFCCA5335B42D';
+
+    console.log(sessionStorage[this.state]);
   }
 
   getEndpointList(): Observable<FhirEndpoint[]> {
@@ -68,6 +70,12 @@ export class SmartAuthService {
       return of(this.sb);
     }
 
+    const ss = JSON.parse(sessionStorage[this.state]);
+    if (ss && ss.accessToken && ss.patientId) {
+      this.sb = new SmartBundle(ss.accessToken, ss.patientId);
+      return of(this.sb);
+    }
+
     return new Observable<SmartBundle>((observer) => {
       // get the parameter map from the ActivatedRoute
       this.sub = route.queryParamMap.subscribe( paramMap => {
@@ -92,10 +100,10 @@ export class SmartAuthService {
             console.log('AccessToken:' + this.sb.accessToken);
             console.log('Patient:' + this.sb.patientId);
 
-            // sessionParams.accessToken = this.sb.accessToken;
-            // sessionParams.patientId = this.sb.patientId;
-            //
-            // sessionStorage[state] = JSON.stringify(sessionParams);
+            sessionStorage[this.state] = JSON.stringify({
+              accessToken: this.sb.accessToken,
+              patientId: this.sb.patientId
+            });
 
             observer.next(this.sb);
           }
@@ -121,13 +129,13 @@ export class SmartAuthService {
     );
   }
 
-  private getUrlParameter(urlParams: any, sParam: string): string {
-    if (isUndefined(urlParams[sParam])) {
-      console.log('parameter ' + sParam + ' does not exist');
-      return '';
-    }
-    return urlParams[sParam];
-  }
+  // private getUrlParameter(urlParams: any, sParam: string): string {
+  //   if (isUndefined(urlParams[sParam])) {
+  //     console.log('parameter ' + sParam + ' does not exist');
+  //     return '';
+  //   }
+  //   return urlParams[sParam];
+  // }
 }
 
 
