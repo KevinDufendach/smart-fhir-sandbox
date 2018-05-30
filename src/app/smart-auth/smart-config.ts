@@ -15,7 +15,7 @@ export const epicSmartAuthConfig: AuthConfig = {
 
   // set the scope for the permissions the client should request
   // The first three are defined by OIDC. The 4th is a usecase-specific one
-  scope: 'patient/*.read launch',
+  scope: 'patient/*.read observation/*.read launch',
 
   /**
    * Defines whether to request a access token during

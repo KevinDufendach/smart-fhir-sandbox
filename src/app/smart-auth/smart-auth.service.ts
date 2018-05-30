@@ -9,6 +9,7 @@ import {SmartBundle} from './smart-bundle';
 import {FhirEndpoint} from './fhir-endpoint';
 import {ActivatedRoute} from '@angular/router';
 import Patient = fhir.Patient;
+import Observation = fhir.Observation;
 
 @Injectable({
   providedIn: 'root'
@@ -43,8 +44,7 @@ export class SmartAuthService {
       + '?response_type=code&client_id='
       + this.config.clientId
       + '&redirect_uri='
-      + _redirectUri)
-    ;
+      + _redirectUri);
 
     console.log('auth window: ' + _url);
 
@@ -132,6 +132,28 @@ export class SmartAuthService {
       }
     );
   }
+
+  getObservations(code?: string): Observable<Observation> {
+    const httpParams = new HttpParams()
+      .set('patient', this.sb.patientId)
+      .set('code', code);
+
+    // if (code !== undefined) {
+    //   console.log('code is: ' + code);
+    //   httpParams.set('code', code);
+    // }
+
+    console.log(httpParams.toString());
+
+    return this.http.get<Observation>(
+      this.config.issuer + 'Observation', {
+        params: httpParams,
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.sb.accessToken)
+      }
+    );
+  }
+
+
 
   // private getUrlParameter(urlParams: any, sParam: string): string {
   //   if (isUndefined(urlParams[sParam])) {

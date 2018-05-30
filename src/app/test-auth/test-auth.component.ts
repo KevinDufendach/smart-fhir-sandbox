@@ -7,8 +7,6 @@ import { OAuthService } from 'angular-oauth2-oidc';
   styleUrls: ['./test-auth.component.css']
 })
 export class TestAuthComponent {
-
-
   constructor(private oauthService: OAuthService) { }
 
   public login() {
