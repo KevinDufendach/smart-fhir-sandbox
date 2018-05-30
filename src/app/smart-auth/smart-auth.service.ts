@@ -70,10 +70,14 @@ export class SmartAuthService {
       return of(this.sb);
     }
 
-    const ss = JSON.parse(sessionStorage[this.state]);
-    if (ss && ss.accessToken && ss.patientId) {
-      this.sb = new SmartBundle(ss.accessToken, ss.patientId);
-      return of(this.sb);
+    // Check to see if access token and patient ID are stored in session storage
+    const ss = sessionStorage[this.state];
+    if (ss !== undefined) {
+      const ss_json = JSON.parse(sessionStorage[this.state]);
+      if (ss_json && ss_json.accessToken && ss_json.patientId) {
+        this.sb = new SmartBundle(ss_json.accessToken, ss_json.patientId);
+        return of(this.sb);
+      }
     }
 
     return new Observable<SmartBundle>((observer) => {
