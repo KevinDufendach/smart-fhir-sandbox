@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/krd-smart-fhir-sandbox",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
