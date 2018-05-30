@@ -8,6 +8,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
 })
 export class TestAuthComponent {
 
+
   constructor(private oauthService: OAuthService) { }
 
   public login() {

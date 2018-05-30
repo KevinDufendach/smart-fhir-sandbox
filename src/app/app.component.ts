@@ -10,13 +10,13 @@ import {authConfig} from './auth/auth.config';
 export class AppComponent {
   title = 'app';
 
-  constructor(private oauthService: OAuthService) {
-    this.configureWithNewConfigApi();
+  constructor() {
+    // this.configureWithNewConfigApi();
   }
 
-  private configureWithNewConfigApi() {
-    this.oauthService.configure(authConfig);
-    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
-    this.oauthService.loadDiscoveryDocumentAndTryLogin();
-  }
+  // private configureWithNewConfigApi() {
+  //   this.oauthService.configure(authConfig);
+  //   this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+  //   this.oauthService.loadDiscoveryDocumentAndTryLogin();
+  // }
 }

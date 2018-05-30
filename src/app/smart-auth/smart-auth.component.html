@@ -1,0 +1,8 @@
+<mat-form-field>
+  <mat-select [(value)]="selectedEndpoint" placeholder="FHIR Endpoints">
+    <mat-option *ngFor="let endpoint of endpoints" [value]="endpoint.FHIRPatientFacingURI">
+      {{ endpoint.OrganizationName }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<button mat-button (click)="connectToEndpoint(selectedEndpoint)">Connect to Endpoint</button>
